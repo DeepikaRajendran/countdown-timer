@@ -1,0 +1,20 @@
+<div>
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit(eventForm.value)">
+        <label for="name">
+          Event Name
+        </label>
+        <input id="name" type="text" formControlName="name"/>
+    <div class="errorMsg" *ngIf="name.hasError('required')&& name.touched">Username Required
+      </div>
+   
+          <label for="name">
+            Event Date
+          </label>
+          <input id="date" type="date" formControlName="date"/>
+
+      <div class="errorMsg" *ngIf="date.hasError('required')&& date.touched">Date Required
+        </div>
+  <button class="button" type="submit" [disabled]="!eventForm.valid"> Add Event </button>
+</form> 
+</div>
+  
