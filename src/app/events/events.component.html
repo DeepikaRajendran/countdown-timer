@@ -1,9 +1,8 @@
 <div>
   <ul>
-    <li>Event 1</li>
-    <li>Event 2</li>
-    <li>Event 3</li>
-    <li>Event 4</li>
-    <li>Event 5</li>
+    <li *ngFor="let event of events">
+      {{event.name}}
+      <app-show-timer [date]="event.event_date"></app-show-timer>
+    </li>   
   </ul>
 </div>

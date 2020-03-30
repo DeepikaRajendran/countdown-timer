@@ -6,23 +6,23 @@ import * as moment from 'moment';
   styleUrls: ['./show-timer.component.css']
 })
 export class ShowTimerComponent implements OnInit {
-  date: Date;
+  // date: Date;
   days = 0;
   hrs = 0;
   mins = 0;
   secs = 0;
+  @Input() date: Date;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.date);
     setInterval( () => {
       this.calculateTime(this.date);
     }, 1000);
   }
 
   updateTimer() {
-    console.log(this.date);
+    // console.log(this.date);
   }
 
   calculateTime(date) {

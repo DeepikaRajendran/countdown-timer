@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { EventsService } from '../events.service';
 
 @Component({
   selector: 'app-event',
@@ -8,12 +9,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class EventComponent implements OnInit {
   eventForm;
-  event: Events = {
-    name: '',
-    date: new Date()
-  };
-
-
+  
   get name(): string {
     return this.eventForm.get('name');
   }
@@ -22,7 +18,7 @@ export class EventComponent implements OnInit {
     return this.eventForm.get('date');
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private eventService: EventsService) {
     this.eventForm = this.formBuilder.group({
         name: new FormControl('', Validators.required),
         date: new FormControl('', Validators.required)
@@ -30,15 +26,14 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   onSubmit(formValue) {
-     console.log(formValue);
+     this.eventService.createEvent(formValue).subscribe((res) => {
+      console.log(res);
+       this.eventForm.reset();
+     });
   }
-
 }
 
-interface Events {
-   name: string;
-   date: Date;
-}

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ShowTimerComponent } from './show-timer/show-timer.component';
 import { EventComponent } from './event/event.component';
 import { EventsComponent } from './events/events.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { EventsComponent } from './events/events.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
