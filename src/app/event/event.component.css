@@ -7,7 +7,7 @@ input{
     border: 1px solid lavenderblush;
 }
 input:invalid {
-    background-color: pink;
+    background-color: red;
 }
 div{
     border-radius: 5px;

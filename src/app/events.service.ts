@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './environments/environment';
 import { Event } from './models/event.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +12,16 @@ import { Event } from './models/event.model';
 export class EventsService {
   baseURL = environment.baseUrl;
   eventURL = environment.eventURL;
-
-  constructor(private http: HttpClient) { }
+  eventSubject = new BehaviorSubject < Event[] > ([]);
+  eventState = this.eventSubject.asObservable();
+  constructor(private http: HttpClient) {
+    this.getEvents();
+  }
 
   createEvent(event: Event) {
-    console.log(`${this.baseURL}${this.eventURL}/`);
-    return this.http.post(`${this.baseURL}${this.eventURL}/`, event);
+    this.http.post(`${this.baseURL}${this.eventURL}/`, event).subscribe((data: Event[]) => {
+      this.getEvents();
+    });
   }
 
    updateEvent(event: Event) {}
@@ -23,7 +30,9 @@ export class EventsService {
 
    getEventById(id: number) {}
 
-   getEvents() {
-    return this.http.get(`${this.baseURL}${this.eventURL}/`);
+   getEvents(): void {
+    this.http.get(`${this.baseURL}${this.eventURL}/`).subscribe((events: Event[]) => {
+      this.eventSubject.next(events);
+    });
    }
 }

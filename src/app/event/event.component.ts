@@ -9,7 +9,7 @@ import { EventsService } from '../events.service';
 })
 export class EventComponent implements OnInit {
   eventForm;
-  
+
   get name(): string {
     return this.eventForm.get('name');
   }
@@ -26,14 +26,11 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(formValue) {
-     this.eventService.createEvent(formValue).subscribe((res) => {
-      console.log(res);
-       this.eventForm.reset();
-     });
+    this.eventService.createEvent(formValue);
+    this.eventForm.reset();
   }
 }
 
